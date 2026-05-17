@@ -12,3 +12,5 @@ mvnw.cmd
 *.log
 .env
 .DS_Store
+# Opcional: si quieres ocultar el archivo de propiedades por completo
+# src/main/resources/application.properties
