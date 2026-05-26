@@ -1,19 +1,24 @@
 package com.servitech.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "equipos")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Equipo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String tipo; // Lavadora, Nevera, etc.
     private String marca;
     private String modelo;
     private String numeroSerie;
     private String descripcionFalla;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
@@ -22,6 +27,9 @@ public class Equipo {
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
+
+    public String getTipo() { return tipo; }
+    public void setTipo(String tipo) { this.tipo = tipo; }
 
     public String getMarca() { return marca; }
     public void setMarca(String marca) { this.marca = marca; }

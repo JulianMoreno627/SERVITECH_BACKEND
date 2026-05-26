@@ -1,5 +1,6 @@
 package com.servitech.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -12,11 +13,19 @@ public class DetalleFactura {
     private String concepto;
     private Double subtotal;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "factura_id")
     private Factura factura;
 
     public DetalleFactura() {}
+
+    public DetalleFactura(Long id, String concepto, Double subtotal, Factura factura) {
+        this.id = id;
+        this.concepto = concepto;
+        this.subtotal = subtotal;
+        this.factura = factura;
+    }
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }

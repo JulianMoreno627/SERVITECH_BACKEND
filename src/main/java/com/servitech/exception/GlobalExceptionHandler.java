@@ -14,9 +14,10 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, Object>> handleAllExceptions(Exception ex) {
+        ex.printStackTrace(); // Log the full stack trace to the console
         Map<String, Object> body = new HashMap<>();
         body.put("timestamp", LocalDateTime.now());
-        body.put("message", ex.getMessage());
+        body.put("message", "Error interno del servidor: " + ex.getMessage());
         body.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
         
         return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -24,6 +25,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<Map<String, Object>> handleRuntimeExceptions(RuntimeException ex) {
+        System.err.println("Runtime Exception: " + ex.getMessage());
         Map<String, Object> body = new HashMap<>();
         body.put("timestamp", LocalDateTime.now());
         body.put("message", ex.getMessage());

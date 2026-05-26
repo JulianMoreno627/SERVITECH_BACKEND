@@ -2,8 +2,9 @@ package com.servitech.repository;
 
 import com.servitech.model.OrdenServicio;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import java.util.List;
 
-@Repository
 public interface OrdenServicioRepository extends JpaRepository<OrdenServicio, Long> {
+    List<OrdenServicio> findByClienteId(Long clienteId);
+    List<OrdenServicio> findByTecnicoId(Long tecnicoId);
 }

@@ -7,14 +7,16 @@ public class AuthResponseDTO {
     private String refreshToken;
     private String usuario;
     private Rol rol;
+    private Long id;
 
     public AuthResponseDTO() {}
 
-    public AuthResponseDTO(String token, String refreshToken, String usuario, Rol rol) {
+    public AuthResponseDTO(String token, String refreshToken, String usuario, Rol rol, Long id) {
         this.token = token;
         this.refreshToken = refreshToken;
         this.usuario = usuario;
         this.rol = rol;
+        this.id = id;
     }
 
     public String getToken() { return token; }
@@ -28,4 +30,7 @@ public class AuthResponseDTO {
 
     public Rol getRol() { return rol; }
     public void setRol(Rol rol) { this.rol = rol; }
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 }

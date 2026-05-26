@@ -30,4 +30,31 @@ public class FacturaController {
     public ResponseEntity<List<Factura>> listarPorCliente(@PathVariable Long clienteId) {
         return ResponseEntity.ok(facturaService.listarPorCliente(clienteId));
     }
+
+    @GetMapping("/orden/{ordenId}")
+    public ResponseEntity<?> verPorOrden(@PathVariable Long ordenId) {
+        try {
+            Factura f = facturaService.obtenerPorOrden(ordenId);
+            if (f == null) {
+                f = facturaService.generarFactura(ordenId);
+            }
+            
+            if (f != null) {
+                return ResponseEntity.ok(f);
+            } else {
+                return ResponseEntity.status(404).body("La factura no existe y no se pudo generar.");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error interno al procesar la factura: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/{id}/pagar")
+    public ResponseEntity<?> pagarFactura(@PathVariable Long id) {
+        try {
+            return ResponseEntity.ok(facturaService.pagarFactura(id));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error al procesar el pago: " + e.getMessage());
+        }
+    }
 }

@@ -1,10 +1,13 @@
 package com.servitech.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "historial_revisiones")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class HistorialRevision {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +22,7 @@ public class HistorialRevision {
     @Enumerated(EnumType.STRING)
     private EstadoOrden estadoNuevo;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "orden_id")
     private OrdenServicio ordenServicio;

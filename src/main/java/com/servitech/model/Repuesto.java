@@ -1,9 +1,11 @@
 package com.servitech.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "repuestos")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Repuesto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,6 +16,13 @@ public class Repuesto {
     private Integer stock;
 
     public Repuesto() {}
+
+    public Repuesto(Long id, String nombre, Double precio, Integer stock) {
+        this.id = id;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.stock = stock;
+    }
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }

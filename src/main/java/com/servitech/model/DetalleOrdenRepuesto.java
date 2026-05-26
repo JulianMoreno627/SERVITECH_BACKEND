@@ -1,14 +1,18 @@
 package com.servitech.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "detalle_orden_repuestos")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class DetalleOrdenRepuesto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "orden_id")
     private OrdenServicio ordenServicio;
