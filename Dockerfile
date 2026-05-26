@@ -9,5 +9,7 @@ RUN mvn clean package -DskipTests
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 COPY --from=build /app/target/servitech-backend-0.0.1-SNAPSHOT.jar app.jar
-EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]
+
+# Render asigna dinámicamente un puerto en la variable PORT
+# Usamos shell form para que se expanda la variable de entorno
+ENTRYPOINT java -jar app.jar --server.port=${PORT:-8080}
