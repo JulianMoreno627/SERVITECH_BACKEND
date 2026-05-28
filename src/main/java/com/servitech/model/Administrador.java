@@ -5,14 +5,14 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "administradores")
-public class Administrador extends Persona {
+public class Administrador extends Persona { 
 
-    public Administrador() {
+    public Administrador() { 
         super();
     }
 
-    @Override
+    @Override 
     public String getResumen() {
-        return "Administrador: " + getNombre() + " - Acceso total a estadísticas y gestión.";
+        return "Administrador: " + getNombre() + " - Acceso total a estadísticas y gestión."; 
     }
 }
