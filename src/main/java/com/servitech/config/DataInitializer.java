@@ -18,9 +18,12 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        if (opcionMenuRepository.count() == 0) {
-            // Menú de SERVITECH - Restaurando Gestión de Servicios y eliminando los otros dos
-            OpcionMenu servitech = new OpcionMenu("ServiTech", null, "build");
+        // Limpiamos el menú existente para asegurar que se cargue la versión de ServiTech
+        // y no queden restos de ejemplos anteriores
+        opcionMenuRepository.deleteAll();
+
+        // Menú de SERVITECH - Restaurando Gestión de Servicios
+        OpcionMenu servitech = new OpcionMenu("ServiTech", null, "build");
             
             OpcionMenu gestionServicio = new OpcionMenu("Gestión de Servicios", null, "assignment");
             gestionServicio.addHijo(new OpcionMenu("Panel Principal", "/dashboard", "dashboard"));
@@ -29,7 +32,6 @@ public class DataInitializer implements CommandLineRunner {
 
             servitech.addHijo(gestionServicio);
             opcionMenuRepository.save(servitech);
-        }
 
         if (usuarioService.buscarPorUsuario("admin").isEmpty()) {
             Administrador admin = new Administrador();
